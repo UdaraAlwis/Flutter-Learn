@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_for_all/firebase_for_all.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_flash_chat_app/components/rounded_button.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
@@ -15,7 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final _auth = FirebaseAuth.instance;
+  final _auth = FirebaseAuthForAll.instance;
   late String email;
   late String password;
 
@@ -46,8 +46,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onChanged: (value) {
                     email = value;
                   },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email'),
+                  decoration: kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
                 ),
                 const SizedBox(
                   height: 8.0,
@@ -58,8 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onChanged: (value) {
                     password = value;
                   },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your password.'),
+                  decoration: kTextFieldDecoration.copyWith(hintText: 'Enter your password.'),
                 ),
                 const SizedBox(
                   height: 24.0,
@@ -74,8 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       progress?.show();
 
                       try {
-                        var result = await _auth.signInWithEmailAndPassword(
-                            email: email, password: password);
+                        var result = await _auth.signInWithEmailAndPassword(email: email, password: password);
 
                         if (result.user != null) {
                           if (mounted) {

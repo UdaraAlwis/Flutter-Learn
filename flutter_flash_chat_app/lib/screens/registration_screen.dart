@@ -32,11 +32,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Hero(
-                  tag: 'logo',
-                  child: Container(
-                    height: 200.0,
-                    child: Image.asset('images/logo.png'),
+                Flexible(
+                  child: Hero(
+                    tag: 'logo',
+                    child: Container(
+                      height: 200.0,
+                      child: Image.asset('images/logo.png'),
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -48,8 +50,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   onChanged: (value) {
                     email = value;
                   },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your email'),
+                  decoration: kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
                 ),
                 const SizedBox(
                   height: 8.0,
@@ -60,8 +61,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   onChanged: (value) {
                     password = value;
                   },
-                  decoration: kTextFieldDecoration.copyWith(
-                      hintText: 'Enter your password'),
+                  decoration: kTextFieldDecoration.copyWith(hintText: 'Enter your password'),
                 ),
                 const SizedBox(
                   height: 24.0,
@@ -76,8 +76,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       progress?.show();
 
                       try {
-                        final newUser =
-                            await _auth.createUserWithEmailAndPassword(
+                        final newUser = await _auth.createUserWithEmailAndPassword(
                           email: email,
                           password: password,
                         );
