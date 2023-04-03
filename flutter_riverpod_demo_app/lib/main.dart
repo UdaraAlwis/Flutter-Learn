@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_riverpod_demo_app/state_provider/state_provider_demo.dart';
 
-import 'provider/provider_demo.dart';
-import 'state_notifier_provider/state_notifier_provider.dart';
+import '1_provider/provider_demo.dart';
+import '2_state_provider/state_provider_demo.dart';
+import '3_state_notifier_provider/state_notifier_provider.dart';
+import '4_future_provider/future_provider.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           HelloWorldWidget3(),
           CounterWidget(),
           ClockWidget(),
+          WeatherWidget(),
         ],
       ),
     );
