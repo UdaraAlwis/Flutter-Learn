@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
-var weatherFutureProvider = FutureProvider.autoDispose((ref) {
-  final weatherRepository = ref.watch(weatherRepositoryProvider);
+var weatherFutureProvider = FutureProvider.autoDispose<Weather>((ref) {
+  var weatherRepository = ref.watch(weatherRepositoryProvider);
   return weatherRepository.getWeather(city: 'London');
 });
 
-var weatherRepositoryProvider = Provider<WeatherRepository>((ref) {
+var weatherRepositoryProvider = Provider((ref) {
   return WeatherRepository();
 });
 
@@ -18,12 +18,10 @@ class WeatherWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final weatherAsync = ref.watch(weatherFutureProvider);
-    // use pattern matching to map the state to the UI
-    return weatherAsync.when(
-      loading: () => const CircularProgressIndicator(),
-      error: (err, stack) => Text('Error: $err'),
-      data: (weather) => Text(
+    var weatherAsync = ref.watch(weatherFutureProvider);
+
+    return weatherAsync.when(data: (weather) {
+      return Text(
         '${weather.cityName}: ${weather.description}',
         style: const TextStyle(
             color: Colors.white,
@@ -31,8 +29,12 @@ class WeatherWidget extends ConsumerWidget {
             fontWeight: FontWeight.w100,
             fontStyle: FontStyle.normal,
             fontSize: 80),
-      ),
-    );
+      );
+    }, error: (err, stack) {
+      return Text('Error: $err');
+    }, loading: () {
+      return const CircularProgressIndicator();
+    });
   }
 }
 
@@ -67,7 +69,9 @@ class Weather {
   factory Weather.fromJson(Map<String, dynamic> json) {
     return Weather(
       cityName: json['name'],
-      temperature: json['main']['temp'],
+      temperature: double.tryParse(json['main']['temp'].toString()) != null
+          ? json['main']['temp']
+          : double.parse(json['main']['temp']),
       description: json['weather'][0]['description'],
     );
   }
