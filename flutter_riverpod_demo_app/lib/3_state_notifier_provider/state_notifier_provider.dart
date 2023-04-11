@@ -26,8 +26,8 @@ var clockProvider = StateNotifierProvider<Clock, DateTime>(
   },
 );
 
-class ClockWidget extends ConsumerWidget {
-  const ClockWidget({super.key});
+class ClockStateNotifierWidget extends ConsumerWidget {
+  const ClockStateNotifierWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

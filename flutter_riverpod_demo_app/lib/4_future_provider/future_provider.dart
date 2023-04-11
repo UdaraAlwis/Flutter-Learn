@@ -13,8 +13,8 @@ var weatherRepositoryProvider = Provider((ref) {
   return WeatherRepository();
 });
 
-class WeatherWidget extends ConsumerWidget {
-  const WeatherWidget({super.key});
+class WeatherFutreProvderWidget extends ConsumerWidget {
+  const WeatherFutreProvderWidget({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

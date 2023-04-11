@@ -6,6 +6,7 @@ import '2_state_provider/state_provider_demo.dart';
 import '3_state_notifier_provider/state_notifier_provider.dart';
 import '4_future_provider/future_provider.dart';
 import '5_stream_provider/stream_provider.dart';
+import '6_change_noifier_provider/change_notifier_provider.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -25,10 +26,11 @@ class MyApp extends StatelessWidget {
           HelloWorldWidget1(),
           HelloWorldWidget2(),
           HelloWorldWidget3(),
-          CounterWidget(),
-          ClockWidget(),
-          WeatherWidget(),
+          CounterStateProviderWidget(),
+          ClockStateNotifierWidget(),
+          WeatherFutreProvderWidget(),
           ClockStreamWidget(),
+          CounterChangeNotifierWidget(),
         ],
       ),
     );
