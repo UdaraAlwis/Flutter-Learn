@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_watchbase_demo_app/model/watch_details.dart';
+import 'package:flutter_watchbase_demo_app/pages/watchdetails_page.dart';
 
 import 'model/brand_family.dart';
 import 'model/brand.dart';
@@ -16,6 +17,7 @@ void main() {
         primarySwatch: Colors.blue,
       ),
       home: const HomePage(),
+      routes: {WatchDetailsPage.id: (context) => const WatchDetailsPage()},
     ),
   ));
 }
@@ -44,7 +46,6 @@ final watchDetailsProvider = FutureProvider<WatchDetails>((ref) async {
   var repository = ref.watch(brandRepositoryProvider);
   var selectedWatchId = ref.watch(selectedWatchIdProvider);
   var watchdetails = await repository.getWatchDetails(selectedWatchId!);
-  print(watchdetails);
   return watchdetails;
 });
 

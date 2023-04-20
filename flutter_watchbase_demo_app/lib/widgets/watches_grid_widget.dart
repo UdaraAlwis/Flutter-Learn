@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:flutter_watchbase_demo_app/main.dart';
+import 'package:flutter_watchbase_demo_app/pages/watchdetails_page.dart';
 
 class WatchesGridWidget extends StatelessWidget {
   const WatchesGridWidget({
@@ -28,6 +29,7 @@ class WatchesGridWidget extends StatelessWidget {
                   child: InkWell(
                     onTap: () {
                       ref.read(selectedWatchIdProvider.notifier).state = watch.id;
+                      Navigator.pushNamed(context, WatchDetailsPage.id);
                     },
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,

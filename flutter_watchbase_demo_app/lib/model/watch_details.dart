@@ -38,27 +38,28 @@ class WatchDetails {
     this.prices,
   });
 
-  factory WatchDetails.fromJson(Map<String, dynamic> json) {
-    return WatchDetails(
-      wb: json['wb'] != null ? Wb.fromJson(json['wb']) : null,
-      referenceNumber: json['reference_number'],
-      name: json['name'],
-      gender: json['gender'],
-      released: json['released'],
-      stopped: json['stopped'],
-      limitedNr: json['limited_nr'],
-      waterresistance: json['waterresistance'],
-      description: json['description'],
-      brand: json['brand'] != null ? Brand.fromJson(json['brand']) : null,
-      family: json['family'] != null ? BrandFamily.fromJson(json['family']) : null,
-      caliber: json['caliber'] != null ? Caliber.fromJson(json['caliber']) : null,
-      watchCase: json['case'] != null ? WatchCase.fromJson(json['case']) : null,
-      dial: json['dial'] != null ? Dial.fromJson(json['dial']) : null,
-      // ignore: prefer_null_aware_operators
-      images: json['images'] != null ? json['images'].cast<String>() : null,
-      // ignore: prefer_null_aware_operators
-      prices: json['prices'] != null ? json['prices'].map<Prices>((json) => Prices.fromJson(json)).toList() : null,
-    );
+  WatchDetails.fromJson(Map<String, dynamic> json) {
+    wb = json['wb'] != null ? Wb.fromJson(json['wb']) : null;
+    referenceNumber = json['reference_number'];
+    name = json['name'];
+    gender = json['gender'];
+    released = json['released'];
+    stopped = json['stopped'];
+    limitedNr = json['limited_nr'];
+    waterresistance = json['waterresistance'];
+    description = json['description'];
+    brand = json['brand'] != null ? Brand.fromJson(json['brand']) : null;
+    family = json['family'] != null ? BrandFamily.fromJson(json['family']) : null;
+    caliber = json['caliber'] != null ? Caliber.fromJson(json['caliber']) : null;
+    watchCase = json['case'] != null ? WatchCase.fromJson(json['case']) : null;
+    dial = json['dial'] != null ? Dial.fromJson(json['dial']) : null;
+    images = json['images'].cast<String>();
+    if (json['prices'] != null) {
+      prices = <Prices>[];
+      json['prices'].forEach((v) {
+        prices!.add(Prices.fromJson(v));
+      });
+    }
   }
 }
 
