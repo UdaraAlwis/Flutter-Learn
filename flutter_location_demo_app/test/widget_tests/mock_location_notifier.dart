@@ -1,13 +1,18 @@
 import 'dart:async';
 
+import 'package:flutter_location_demo_app/location_notifier.dart';
+import 'package:flutter_location_demo_app/location_service_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:mockito/mockito.dart';
 
-import 'location_service_provider.dart';
-
-final locationNotifierProvider = AsyncNotifierProvider<LocationNotifier, Position?>(LocationNotifier.new);
-
-class LocationNotifier extends AsyncNotifier<Position?> {
+// As of now I'm duplicating the entire LocationNotifier
+// in this mock class to get it to work
+// If not I get this weird error on test run
+// _TypeError (type 'Null' is not a subtype of type 'Future<void>')
+// Shouldn't there be a better way?
+class MockLocationNotifier extends AsyncNotifier<Position?> with Mock implements LocationNotifier {
+  @override
   Future<void> getCurrentLocation() async {
     var locationService = ref.watch(locationServiceProvider);
 
