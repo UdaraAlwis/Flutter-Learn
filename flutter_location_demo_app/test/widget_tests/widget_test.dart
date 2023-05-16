@@ -5,13 +5,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:flutter_location_demo_app/main.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../unit_tests/location_notifier_test.mocks.dart';
 import 'mock_location_notifier.dart';
 
-@GenerateNiceMocks([MockSpec<Position?>()])
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     var locationNotifierMock = MockLocationNotifier();
