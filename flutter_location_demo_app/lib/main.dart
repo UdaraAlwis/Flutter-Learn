@@ -37,17 +37,22 @@ class _MyAppState extends ConsumerState<MyApp> {
                           error.toString(),
                           style: const TextStyle(fontSize: 20),
                         ),
-                    loading: () => const Center(child: CircularProgressIndicator.adaptive())),
+                    loading: () => const Center(
+                        child: CircularProgressIndicator.adaptive())),
               ),
               SizedBox(
                 height: 50,
                 width: 300,
                 child: ElevatedButton(
                     onPressed: () async {
-                      await ref.watch(locationNotifierProvider.notifier).getCurrentLocation();
+                      await ref
+                          .watch(locationNotifierProvider.notifier)
+                          .getCurrentLocation();
                     },
                     child: Text(
-                      ref.watch(locationNotifierProvider).isLoading ? 'Please Wait...' : 'Update Location',
+                      ref.watch(locationNotifierProvider).isLoading
+                          ? 'Please Wait...'
+                          : 'Update Location',
                       style: const TextStyle(fontSize: 20),
                     )),
               )

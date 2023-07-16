@@ -11,7 +11,8 @@ import '../unit_tests/location_notifier_test.mocks.dart';
 import 'mock_location_notifier.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('User is able to see the device location',
+      (WidgetTester tester) async {
     var locationNotifierMock = MockLocationNotifier();
     var mockLocationService = MockLocationService();
 
@@ -24,9 +25,12 @@ void main() {
         heading: 0,
         speed: 0,
         speedAccuracy: 0);
-    when(mockLocationService.isLocationServiceEnabled()).thenAnswer((_) => Future(() => true));
-    when(mockLocationService.checkPermission()).thenAnswer((_) => Future(() => LocationPermission.always));
-    when(mockLocationService.getCurrentPosition(desiredAccuracy: LocationAccuracy.high))
+    when(mockLocationService.isLocationServiceEnabled())
+        .thenAnswer((_) => Future(() => true));
+    when(mockLocationService.checkPermission())
+        .thenAnswer((_) => Future(() => LocationPermission.always));
+    when(mockLocationService.getCurrentPosition(
+            desiredAccuracy: LocationAccuracy.high))
         .thenAnswer((_) => Future(() => expectedPosition));
 
     await tester.pumpWidget(ProviderScope(
@@ -42,7 +46,9 @@ void main() {
     await tester.tap(find.text('Update Location'));
     await tester.pumpAndSettle();
 
-    expect(find.textContaining('Location: Lat - ${expectedPosition.latitude}, Long - ${expectedPosition.longitude}'),
+    expect(
+        find.textContaining(
+            'Location: Lat - ${expectedPosition.latitude}, Long - ${expectedPosition.longitude}'),
         findsOneWidget);
   });
 }
